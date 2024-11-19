@@ -1,0 +1,28 @@
+{
+  "name": "namastereact",
+  "version": "1.0.0",
+  "description": "This is namaste react.",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/anshi06/Namaste-React"
+  },
+  "keywords": [
+    "React"
+  ],
+  "author": "Anshika Upadhyay",
+  "license": "ISC",
+  "devDependencies": {
+    "parcel": "^2.13.0",
+    "process": "^0.11.10"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "browserslist": [
+    "last 2 versions"
+  ] 
+}
