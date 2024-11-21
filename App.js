@@ -1,44 +1,63 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-
-//creating a element is core thing of react.
-const parent = React.createElement(
-  "div",
-  { id: "parent" },
-  React.createElement(
-    "div",
-    { id: "children" },
-    React.createElement("h1", {}, "I am h1 tag")
-  )
-);
-//Creating React element using core react.
-const heading = React.createElement(
-  "h1",
-  { id: "heading" },
-  "Hello world from React!"
-);
-
-console.log(heading); //Object, In the end it is an react element.
-
-//JSX
-const jsxHeading = <h1 id="head">JSX Heading</h1>; //React Element using JSX
-
-console.log(jsxHeading); //Object //jsxHeading is same as heading
-
-//creating the root is the job of react dom.
-const root = ReactDOM.createRoot(document.getElementById("root")); //created root for react.
-
-//Component Composition
-const Title = () => <h2>Title</h2>;
-const HeadingComponent = () => {
+const Header = () => {
   return (
-    <div>
-      <Title />
-      {Title()}
-      <Title></Title>
-      <h1>This is Heading Component.</h1>
+    <div className="header">
+      <div className="logo-container">
+        <img
+          className="logo"
+          alt="Freshly Food logo"
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8jad6Wpa5VfaLaF8aoLnGsf4UxXuvnUseiQ&s"
+        />
+      </div>
+      <div className="nav-items">
+        <ul>
+          <li>Home</li>
+          <li>About us</li>
+          <li>Contact</li>
+          <li>Cart</li>
+        </ul>
+      </div>
     </div>
   );
 };
 
-root.render(<HeadingComponent />); //Append heading inside root div.
+const RestaurantCard = ({ resName }) => {
+  return (
+    <div className="res-card">
+      <img
+        className="res-logo"
+        alt="res-logo"
+        src="https://res.cloudinary.com/eatbite/image/upload/v1714630033/restaurants/tmlohg2xcpcndejjqjsz.jpg"
+      />
+      <h3>{resName}</h3>
+      <h4>Pastry, Desserts, Cuisins</h4>
+      <h4>4.4 stars</h4>
+      <h4>38 mins</h4>
+    </div>
+  );
+};
+
+const Body = () => {
+  return (
+    <div className="body">
+      <div className="search">Search</div>
+      <div className="res-container">
+        <RestaurantCard resName="Meghna Foods" />
+        <RestaurantCard resName="Dominos" />
+      </div>
+    </div>
+  );
+};
+export const App = () => {
+  return (
+    <div className="app">
+      <Header />
+      <Body />
+    </div>
+  );
+};
+
+const root = ReactDOM.createRoot(document.getElementById("root")); //created root for react.
+
+root.render(<App />); //Append heading inside root div.
