@@ -3,11 +3,13 @@ import RestaurantCard from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 import { SWIGGY_API_URL } from "../utils/constants";
 import { Link } from "react-router";
+import useOnlineStatus from "../hooks/useOnlineStatus";
 
 const Body = () => {
   const [restaurants, setRestaurants] = useState([]);
   const [searchText, setSearchText] = useState("");
   const [filteredRes, setFilteredRes] = useState([]);
+  const onlineStatus = useOnlineStatus();
 
   useEffect(() => {
     fetchData();
@@ -24,6 +26,10 @@ const Body = () => {
 
   if (restaurants.length === 0) {
     return <Shimmer />;
+  }
+
+  if(onlineStatus == false){
+    return <h1>Looks like you're offline, Please check your internet connection!</h1>
   }
 
   return (
