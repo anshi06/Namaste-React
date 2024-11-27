@@ -11,10 +11,10 @@ const RestaurantCard = ({ resData }) => {
   } = resData.info;
 
   return (
-    <div className="res-card">
-      <img className="res-logo" alt="res-logo" src={CDN_URL+cloudinaryImageId} />
-      <h3>{name}</h3>
-      <h4>{cuisines}</h4>
+    <div className="m-4 p-4 w-[300px] bg-gray-100 rounded shadow-sm hover:scale-110">
+      <img className="rounded-lg object-fill h-60 w-96 " alt="res-logo" src={CDN_URL+cloudinaryImageId} />
+      <h3 className="font-bold py-2 text-lg">{name}</h3>
+      <h4>{cuisines[0]}</h4>
       <h4>{avgRating + " stars"}</h4>
       <h4>{costForTwo}</h4>
       <h4>{sla.deliveryTime} mins</h4>
