@@ -1,15 +1,20 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import RestaurantCard from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 import { SWIGGY_API_URL } from "../utils/constants";
 import { Link } from "react-router";
 import useOnlineStatus from "../hooks/useOnlineStatus";
+import { PromotedRestaurantCard } from "./RestaurantCard";
+import UserContext from "../context/UserContext";
 
 const Body = () => {
   const [restaurants, setRestaurants] = useState([]);
   const [searchText, setSearchText] = useState("");
   const [filteredRes, setFilteredRes] = useState([]);
   const onlineStatus = useOnlineStatus();
+  const { loggedInUser, setUserName } = useContext(UserContext);
+
+  const RestaurantCardPromoted = PromotedRestaurantCard(RestaurantCard)
 
   useEffect(() => {
     fetchData();
@@ -59,11 +64,24 @@ const Body = () => {
           Top Rated Restaurant
         </button>
         </div>
+
+        <div className="m-4 p-4">
+          <label>UserName: </label>
+        <input
+          className="px-4 py-1 bg-gray-50 m-4 rounded-lg border border-black"
+          value={loggedInUser}
+          onChange={(e) => {
+            setUserName(e.target.value);
+          }}/>
+         
+        </div>
         
       </div>
       <div className="flex flex-wrap">
         {filteredRes.map((res) => (
-          <Link key={res.info.id} to={"/restaurants/"+ res.info.id}><RestaurantCard resData={res} /></Link>
+          <Link key={res.info.id} to={"/restaurants/"+ res.info.id}>
+            {res?.info?.promoted ? <RestaurantCardPromoted resData={res}/> :<RestaurantCard resData={res} />}
+            </Link>
         ))}
       </div>
     </div>
